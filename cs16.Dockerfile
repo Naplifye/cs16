@@ -1,0 +1,25 @@
+# Use SteamCMD Docker image
+FROM cm2network/steamcmd:latest
+
+# Set environment variables for the server
+ENV steamappdir=/home/steam/cs16
+ENV steamappid=90
+
+# Create directory for cs16
+RUN mkdir -p ${steamappdir}
+
+# Install the Counter-Strike 1.6 server
+RUN for i in {1..5}; do /home/steam/steamcmd/steamcmd.sh \
++force_install_dir ${steamappdir} \
++login anonymous \
++app_update ${steamappid} validate \
++quit && break || sleep 30; done
+    
+# Expose ports for server connection (default ports)
+EXPOSE 27015/udp 27015/tcp
+
+# Set the working directory
+WORKDIR ${steamappdir}
+
+# Command to start the CS 1.6 server
+CMD ["./hlds_run", "-game", "cstrike", "-console", "-port", "27015", "+maxplayers", "16", "+map", "de_dust"]
