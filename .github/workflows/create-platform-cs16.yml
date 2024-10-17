@@ -1,41 +1,34 @@
-name: Combine ReHLDS and ReUnion Files
+name: Download ReHLDS and Reunion
 
 on:
   push:
     branches:
-      - main  # Change to your default branch if needed
-  workflow_dispatch:  # Allows manual trigger of the workflow
+      - main
+  workflow_dispatch:
 
 jobs:
-  combine_files:
+  download:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Create Combined Directory
-        run: mkdir -p combined
-
-      - name: Download ReHLDS Files
+      - name: Download latest ReHLDS release
         run: |
-          curl -L -o combined/rehl_files.zip https://api.github.com/repos/dreamstalker/rehlds/releases/latest
-          # Unzip the downloaded files if needed
-          unzip combined/rehl_files.zip -d combined/
+          curl -L -o rehlds.zip $(curl -s https://api.github.com/repos/dreamstalker/rehlds/releases/latest | grep "rehlts" | cut -d '"' -f 4)
 
-      - name: Download ReUnion Files
+      - name: Download latest Reunion release
         run: |
-          curl -L -o combined/reunion_files.zip https://api.github.com/repos/whosyourdaddy/reunion/releases/latest
-          # Unzip the downloaded files if needed
-          unzip combined/reunion_files.zip -d combined/
+          curl -L -o reunion.zip $(curl -s https://api.github.com/repos/Reunion/REUNION/releases/latest | grep "Reunion" | cut -d '"' -f 4)
 
-      - name: List Combined Directory
-        run: ls -la combined
-
-      - name: Commit and Push Changes
+      - name: Unzip files
         run: |
-          git config --local user.email "marti.dimitrov1@icloud.com"
-          git config --local user.name "Marti Dimitrov"
-          git add combined/
-          git commit -m "Combined ReHLDS and ReUnion files"
-          git push
+          mkdir combined
+          unzip rehlds.zip -d rehlds
+          unzip reunion.zip -d reunion
+          cp -r rehlds/* combined/
+          cp -r reunion/* combined/
+
+      - name: Upload combined folder as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: combined-rehlds-reunion
+          path: combined/
