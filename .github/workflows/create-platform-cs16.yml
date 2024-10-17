@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main  
-      
+  workflow_dispatch:  # Allow manual triggering
 jobs:
   create-platform:
     runs-on: ubuntu-latest  
@@ -13,20 +13,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2  
 
-      - name: Create directory for CS16 Platform
-        run: mkdir -p platform-cs16
-
-      - name: Download rehlds
+      - name: Download ReHLDS
         run: |
-          # Download the latest release zip of the rehlds repository.
-          curl -L -o tools/rehlds.zip https://github.com/dreamstalker/rehlds/archive/refs/heads/master.zip
-        
-          # Extract the zip file into the platform directory.
-          unzip tools/rehlds.zip -d platform-cs16
-        
-          # Remove the zip file after extraction.
-          rm tools/rehlds.zip 
-          
-      - name: List extracted rehlds contents
-        # List the contents of the extracted directory for verification     
-        run: ls -R tools/rehlds-master 
+          echo "Downloading ReHLDS..."
+          wget -q https://github.com/dreamstalker/rehlds/archive/refs/tags/v5.0.0.tar.gz -O rehlds.tar.gz
+          mkdir rehlds
+          tar -xzf rehlds.tar.gz -C rehlds --strip-components=1
+
+      - name: Download ReUnion
+        run: |
+          echo "Downloading ReUnion..."
+          wget -q https://github.com/reunion-team/reunion/archive/refs/tags/v0.1.0.tar.gz -O reunion.tar.gz
+          mkdir reunion
+          tar -xzf reunion.tar.gz -C reunion --strip-components=1
+
+      - name: List downloaded files
+        run: |
+          echo "ReHLDS files:"
+          ls -l rehlds
+          echo "ReUnion files:"
+          ls -l reunion
