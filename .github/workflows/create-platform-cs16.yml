@@ -19,13 +19,13 @@ jobs:
 
       - name: Download ReHLDS Files
         run: |
-          curl -L -o combined/rehl_files.zip https://example.com/path/to/rehlds/files.zip
+          curl -L -o combined/rehl_files.zip https://api.github.com/repos/dreamstalker/rehlds/releases/latest
           # Unzip the downloaded files if needed
           unzip combined/rehl_files.zip -d combined/
 
       - name: Download ReUnion Files
         run: |
-          curl -L -o combined/reunion_files.zip https://example.com/path/to/reunion/files.zip
+          curl -L -o combined/reunion_files.zip https://api.github.com/repos/whosyourdaddy/reunion/releases/latest
           # Unzip the downloaded files if needed
           unzip combined/reunion_files.zip -d combined/
 
