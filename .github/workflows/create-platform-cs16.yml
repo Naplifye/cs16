@@ -1,31 +1,32 @@
-name: Create Platform for CS 1.6 Server
+name: Download ReHLDS and ReUnion
 
 on:
   push:
     branches:
-      - main  
+      - main
   workflow_dispatch:  # Allow manual triggering
+
 jobs:
-  create-platform:
-    runs-on: ubuntu-latest  
+  download:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2  
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Download ReHLDS
         run: |
           echo "Downloading ReHLDS..."
-          wget -q https://github.com/dreamstalker/rehlds/archive/refs/tags/v5.0.0.tar.gz -O rehlds.tar.gz
+          wget -q https://github.com/dreamstalker/rehlds/archive/refs/tags/v5.0.0.tar.gz -O rehlds.tar.gz || { echo "Failed to download ReHLDS"; exit 1; }
           mkdir rehlds
-          tar -xzf rehlds.tar.gz -C rehlds --strip-components=1
+          tar -xzf rehlds.tar.gz -C rehlds --strip-components=1 || { echo "Failed to extract ReHLDS"; exit 1; }
 
       - name: Download ReUnion
         run: |
           echo "Downloading ReUnion..."
-          wget -q https://github.com/reunion-team/reunion/archive/refs/tags/v0.1.0.tar.gz -O reunion.tar.gz
+          wget -q https://github.com/reunion-team/reunion/archive/refs/tags/v0.1.0.tar.gz -O reunion.tar.gz || { echo "Failed to download ReUnion"; exit 1; }
           mkdir reunion
-          tar -xzf reunion.tar.gz -C reunion --strip-components=1
+          tar -xzf reunion.tar.gz -C reunion --strip-components=1 || { echo "Failed to extract ReUnion"; exit 1; }
 
       - name: List downloaded files
         run: |
