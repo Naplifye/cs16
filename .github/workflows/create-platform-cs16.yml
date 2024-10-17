@@ -1,34 +1,31 @@
-name: Download ReHLDS and Reunion
+name: Build ReHLDS and Reunion
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  download:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download latest ReHLDS release
-        run: |
-          curl -L -o rehlds.zip $(curl -s https://api.github.com/repos/dreamstalker/rehlds/releases/latest | grep "rehlts" | cut -d '"' -f 4)
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Download latest Reunion release
+      # Step to download ReHLDS
+      - name: Download ReHLDS
         run: |
-          curl -L -o reunion.zip $(curl -s https://api.github.com/repos/Reunion/REUNION/releases/latest | grep "Reunion" | cut -d '"' -f 4)
+          wget -qO- https://github.com/dreamstalker/rehlds/releases/download/<version>/rehlds-bin.zip -O rehlds-bin.zip
+          unzip rehlds-bin.zip -d rehlds
+          rm rehlds-bin.zip
 
-      - name: Unzip files
+      # Step to download Reunion
+      - name: Download Reunion
         run: |
-          mkdir combined
-          unzip rehlds.zip -d rehlds
-          unzip reunion.zip -d reunion
-          cp -r rehlds/* combined/
-          cp -r reunion/* combined/
-
-      - name: Upload combined folder as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: combined-rehlds-reunion
-          path: combined/
+          wget -qO- https://github.com/dreamstalker/reunion/releases/download/<version>/reunion-bin.zip -O reunion-bin.zip
+          unzip reunion-bin.zip -d reunion
+          rm reunion-bin.zip
