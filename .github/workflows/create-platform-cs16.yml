@@ -1,25 +1,16 @@
-name: Download rehlds Release
+name: My First Workflow
 
-on:
-  workflow_dispatch:
+on: push
 
 jobs:
-  download-rehlds-release:
-    runs-on: ubuntu-latest
+    first_job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Welcome message
+              run: echo "My first Github Actions Job"
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+            - name: 
+              run: ls
 
-    - name: Download release from dreamstalker/rehlds
-      run: |
-        mkdir -p downloaded_releases/rehlds
-        curl -L -o downloaded_releases/rehlds/rehlds_latest.zip \
-        https://github.com/dreamstalker/rehlds/releases/download/3.13.0.788/rehlds-bin-3.13.0.788.zip
-    - name: Commit and push the downloaded release
-      run: |
-        git config --local user.name "Marti Dimitrov"
-        git config --local user.email "marti.dimitrov1@icloud.com"
-        git add downloaded_releases
-        git commit -m "Downloaded latest rehlds release"
-        git push
+            - name: Read File
+              run: cat README.md
