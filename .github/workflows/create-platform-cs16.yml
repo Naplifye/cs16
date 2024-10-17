@@ -19,4 +19,6 @@ jobs:
                 out-file-path: rehlds
 
             - name: 
-              run: ls -la rehlds
+              run: |
+                ls -la rehlds
+                ls -la dreamstalker-rehlds-f955b07
