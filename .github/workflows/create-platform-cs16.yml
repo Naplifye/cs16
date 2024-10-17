@@ -1,25 +1,41 @@
-name: Download Releases
+name: Combine ReHLDS and ReUnion Files
 
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:
+      - main  # Change to your default branch if needed
+  workflow_dispatch:  # Allows manual trigger of the workflow
 
 jobs:
-  download_and_extract:
+  combine_files:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Download ReHLDS Release
-        run: |
-          curl -L -o rehlds.zip https://github.com/dreamstalker/rehlds/releases/latest/download/rehlds.zip
-          mkdir -p rehlds && unzip rehlds.zip -d rehlds
+      - name: Create Combined Directory
+        run: mkdir -p combined
 
-      - name: Download ReUnion Release
+      - name: Download ReHLDS Files
         run: |
-          curl -L -o reunion.zip https://github.com/reunion/reunion/releases/latest/download/reunion.zip
-          mkdir -p reunion && unzip reunion.zip -d reunion
+          curl -L -o combined/rehl_files.zip https://example.com/path/to/rehlds/files.zip
+          # Unzip the downloaded files if needed
+          unzip combined/rehl_files.zip -d combined/
+
+      - name: Download ReUnion Files
+        run: |
+          curl -L -o combined/reunion_files.zip https://example.com/path/to/reunion/files.zip
+          # Unzip the downloaded files if needed
+          unzip combined/reunion_files.zip -d combined/
+
+      - name: List Combined Directory
+        run: ls -la combined
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "you@example.com"
+          git config --local user.name "Your Name"
+          git add combined/
+          git commit -m "Combined ReHLDS and ReUnion files"
+          git push
