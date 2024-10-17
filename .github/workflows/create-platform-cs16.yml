@@ -34,8 +34,8 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "you@example.com"
-          git config --local user.name "Your Name"
+          git config --local user.email "marti.dimitrov1@icloud.com"
+          git config --local user.name "Marti Dimitrov"
           git add combined/
           git commit -m "Combined ReHLDS and ReUnion files"
           git push
