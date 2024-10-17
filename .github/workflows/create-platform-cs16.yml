@@ -14,7 +14,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Create directory for CS16 Platform
+        run: mkdir -p platform-cs16
 
       # Step to download the latest ReHLDS
       - name: Download latest ReHLDS
