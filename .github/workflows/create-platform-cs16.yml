@@ -19,23 +19,7 @@ jobs:
       # Step to download the latest ReHLDS
       - name: Download latest ReHLDS
         run: |
-          # Fetch latest release information
-          REHLDS_URL=$(curl -s https://api.github.com/repos/dreamstalker/rehlds/releases/latest | grep "browser_download_url" | grep "rehlds-bin.zip" | cut -d '"' -f 4)
-          echo "Latest ReHLDS URL: $REHLDS_URL"
-          
           # Download and unzip
-          wget -qO- "$REHLDS_URL" -O rehlds-bin.zip
+          wget -qO- https://github.com/dreamstalker/rehlds/archive/refs/tags/3.13.0.788.zip -O rehlds-bin.zip
           unzip rehlds-bin.zip -d rehlds
           rm rehlds-bin.zip
-
-      # Step to download the latest Reunion
-      - name: Download latest Reunion
-        run: |
-          # Fetch latest release information
-          REUNION_URL=$(curl -s https://api.github.com/repos/dreamstalker/reunion/releases/latest | grep "browser_download_url" | grep "reunion-bin.zip" | cut -d '"' -f 4)
-          echo "Latest Reunion URL: $REUNION_URL"
-          
-          # Download and unzip
-          wget -qO- "$REUNION_URL" -O reunion-bin.zip
-          unzip reunion-bin.zip -d reunion
-          rm reunion-bin.zip
