@@ -1,25 +1,25 @@
-name: Download ReHLDS
+name: Download Releases
 
 on:
   push:
     branches:
-      - main  # Change to your default branch
+      - main
+  workflow_dispatch:
 
 jobs:
-  download:
+  download_and_extract:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout this repository
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Clone ReHLDS Repository
+      - name: Download ReHLDS Release
         run: |
-          git clone https://github.com/dreamstalker/rehlds.git
-          # Optional: Check out a specific branch if necessary
-          cd rehlds
-          # git checkout <branch> # Uncomment and replace <branch> if needed
+          curl -L -o rehlds.zip https://github.com/dreamstalker/rehlds/releases/latest/download/rehlds.zip
+          mkdir -p rehlds && unzip rehlds.zip -d rehlds
 
-      - name: List files in the ReHLDS repository
+      - name: Download ReUnion Release
         run: |
-          ls -la rehlds
+          curl -L -o reunion.zip https://github.com/reunion/reunion/releases/latest/download/reunion.zip
+          mkdir -p reunion && unzip reunion.zip -d reunion
