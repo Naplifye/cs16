@@ -13,13 +13,16 @@ jobs:
               uses: robinraju/release-downloader@v1
               with: 
                 repository: dreamstalker/rehlds
-                latest: true
                 zipBall: true
                 extract: true
                 fileName: "rehlds-bin-*"
                 out-file-path: "rehlds-bin"
 
-            - name: 
+            - name: Push reHLDS files to repo
+              uses: actions/checkout@v4
               run: |
-                ls -la rehlds-bin && 
-                ls -la rehlds-bin/bin
+                git config --local user.email "marti.dimitrov1@icloud.com"
+                git config --local user.name "Marti Dimitrov"
+                git add .
+                git commit -m "rehlds"
+                git push origin main
