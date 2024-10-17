@@ -20,5 +20,5 @@ jobs:
 
             - name: 
               run: |
-                ls -la rehlds
-                ls -la dreamstalker-rehlds-f955b07
+                ls -la rehlds && 
+                ls -la dreamstalker-rehlds-*
