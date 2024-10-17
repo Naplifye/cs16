@@ -3,7 +3,7 @@ name: create-platform-cs16
 on: push
 
 jobs:
-    first_job:
+    build-rehlds:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repo
@@ -14,3 +14,6 @@ jobs:
               with: 
                 repository: dreamstalker/rehlds
                 latest: true
+                zipBall: true
+                extract: true
+                out-file-path: rehlds
