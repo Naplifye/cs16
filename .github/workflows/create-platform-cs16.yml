@@ -16,4 +16,7 @@ jobs:
                 latest: true
                 zipBall: true
                 extract: true
-                out-file-path: "~/rehlds"
+                out-file-path: rehlds
+
+            - name: 
+              run: ls -latr
