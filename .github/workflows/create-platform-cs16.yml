@@ -19,4 +19,4 @@ jobs:
                 out-file-path: rehlds
 
             - name: 
-              run: ls -latr
+              run: ls -la rehlds
