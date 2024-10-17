@@ -1,28 +1,25 @@
-name: Build ReHLDS and Reunion
+name: Download rehlds Release
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  build:
+  download-rehlds-release:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Create directory for CS16 Platform
-        run: mkdir -p platform-cs16
-
-      # Step to download the latest ReHLDS
-      - name: Download latest ReHLDS
-        run: |
-          # Download and unzip
-          wget -qO- https://github.com/dreamstalker/rehlds/archive/refs/tags/3.13.0.788.zip -O rehlds-bin.zip
-          unzip rehlds-bin.zip -d rehlds
-          rm rehlds-bin.zip
+    - name: Download release from dreamstalker/rehlds
+      run: |
+        mkdir -p downloaded_releases/rehlds
+        curl -L -o downloaded_releases/rehlds/rehlds_latest.zip \
+        https://github.com/dreamstalker/rehlds/releases/download/3.13.0.788/rehlds-bin-3.13.0.788.zip
+    - name: Commit and push the downloaded release
+      run: |
+        git config --local user.name "Marti Dimitrov"
+        git config --local user.email "marti.dimitrov1@icloud.com"
+        git add downloaded_releases
+        git commit -m "Downloaded latest rehlds release"
+        git push
