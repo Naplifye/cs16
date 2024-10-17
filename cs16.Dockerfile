@@ -12,7 +12,8 @@ RUN mkdir -p ${steamappdir}
 RUN for i in {1..5}; do /home/steam/steamcmd/steamcmd.sh \
 +force_install_dir ${steamappdir} \
 +login anonymous \
-+app_update ${steamappid} validate \
++app_set_config ${steamappid} mod cstrike \
++app_update ${steamappid} -beta steam_legacy validate \
 +quit && break || sleep 30; done
     
 # Expose ports for server connection (default ports)
