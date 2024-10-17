@@ -1,0 +1,32 @@
+name: Create Platform for CS 1.6 Server
+
+on:
+  push:
+    branches:
+      - main  
+      
+jobs:
+  create-platform:
+    runs-on: ubuntu-latest  
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2  
+
+      - name: Create directory for CS16 Platform
+        run: mkdir -p platform-cs16
+
+      - name: Download rehlds
+        run: |
+          # Download the latest release zip of the rehlds repository.
+          curl -L -o tools/rehlds.zip https://github.com/dreamstalker/rehlds/archive/refs/heads/master.zip
+        
+          # Extract the zip file into the platform directory.
+          unzip tools/rehlds.zip -d platform-cs16
+        
+          # Remove the zip file after extraction.
+          rm tools/rehlds.zip 
+          
+      - name: List extracted rehlds contents
+        # List the contents of the extracted directory for verification     
+        run: ls -R tools/rehlds-master 
