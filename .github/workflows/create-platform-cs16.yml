@@ -16,7 +16,8 @@ jobs:
                 latest: true
                 zipBall: true
                 extract: true
-                out-file-path: rehlds
+                fileName: "rehlds-bin-*"
+                out-file-path: "rehlds-bin"
 
             - name: 
               run: |
