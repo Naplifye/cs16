@@ -23,6 +23,6 @@ jobs:
               run: |
                 git config --local user.email "marti.dimitrov1@icloud.com"
                 git config --local user.name "Marti Dimitrov"
-                git add "rehlds-bin-*"
+                git add /home/runner/work/cs16/cs16/rehlds-bin
                 git commit -m "rehlds"
                 git push https://${{ secrets.MY_GITHUB_TOKEN }}:@github.com/Naplifye/cs16.git
