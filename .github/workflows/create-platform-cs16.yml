@@ -27,7 +27,9 @@ jobs:
                 extract: true
             
             - name: Delete the zip file from the download of reHLDS
-              run: rm -f "${{ env.folder_rehlds }}/rehlds-bin-*.zip"
+              run: |
+                rm -rf ${{ env.folder_rehlds }}/rehlds-bin-*.zip
+                ls -la
 
             - name: Push reHLDS files to repo
               run: |
