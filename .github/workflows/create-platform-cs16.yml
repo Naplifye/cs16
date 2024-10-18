@@ -15,7 +15,7 @@ jobs:
               uses: actions/checkout@v4
              
             - name: Delete old reHLDS files
-              run: rm -rf $folder_rehlds
+              run: rm -rf ${{ env.folder_rehlds }}
             
             - name: Download reHLDS release files
               uses: robinraju/release-downloader@v1
@@ -23,7 +23,7 @@ jobs:
                 repository: dreamstalker/rehlds
                 latest: true
                 fileName: "${{ env.folder_rehlds }}-*"
-                out-file-path: $folder_rehlds
+                out-file-path: ${{ env.folder_rehlds }}
                 extract: true
             
             - name: Delete the zip file from the download of reHLDS
@@ -35,6 +35,6 @@ jobs:
               run: |
                 git config --local user.email ${{ vars.USER_EMAIL }}
                 git config --local user.name ${{ vars.USER_NAME }}
-                git add /home/runner/work/cs16/cs16/$folder_rehlds
+                git add /home/runner/work/cs16/cs16/${{ env.folder_rehlds }}
                 git commit -m "rehlds"
                 git push https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/${{ vars.USER_NAME }}/cs16.git
