@@ -13,12 +13,11 @@ jobs:
               uses: robinraju/release-downloader@v1
               with: 
                 repository: dreamstalker/rehlds
-                tag: 'latest'
-                zipBall: true
-                extract: true
                 fileName: "rehlds-bin-*"
                 out-file-path: "rehlds-bin"
-
+                zipBall: true
+                extract: true
+                
             - name: Push reHLDS files to repo
               run: |
                 git config --local user.email "marti.dimitrov1@icloud.com"
