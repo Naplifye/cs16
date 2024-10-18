@@ -1,7 +1,9 @@
 name: create-platform-cs16
 
 on: push
-
+permissions:
+  contents: write
+  
 jobs:
     build-rehlds:
         runs-on: ubuntu-latest
