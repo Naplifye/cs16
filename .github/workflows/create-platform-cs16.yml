@@ -10,6 +10,9 @@ jobs:
         steps:
             - name: Checkout repo
               uses: actions/checkout@v4
+             
+            - name: Delete old reHLDS files
+              run: rm -rf rehlds-bin
 
             - name: Download reHLDS repo
               uses: robinraju/release-downloader@v1
