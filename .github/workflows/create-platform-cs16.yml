@@ -19,10 +19,9 @@ jobs:
                 out-file-path: "rehlds-bin"
 
             - name: Push reHLDS files to repo
-              uses: actions/checkout@v4
               run: |
                 git config --local user.email "marti.dimitrov1@icloud.com"
                 git config --local user.name "Marti Dimitrov"
                 git add .
                 git commit -m "rehlds"
-                git push origin main
+                git push origin main      
