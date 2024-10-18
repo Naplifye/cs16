@@ -1,4 +1,4 @@
-name: create-platform-cs16
+name: create-platform-cs16-rehlds
 
 on: push
 permissions:
