@@ -14,15 +14,15 @@ jobs:
               uses: actions/checkout@v4
              
             - name: Delete old reHLDS files
-              run: rm -rf $folder_rehlds
+              run: rm -rf ${{folder_rehlds}}
             
             - name: Download reHLDS release files
               uses: robinraju/release-downloader@v1
               with: 
                 repository: dreamstalker/rehlds
                 latest: true
-                fileName: $folder_rehlds-*
-                out-file-path: $folder_rehlds
+                fileName: ${{folder_rehlds}}-*
+                out-file-path: ${{folder_rehlds}}
                 extract: true
                 
             - name: Push reHLDS files to repo
