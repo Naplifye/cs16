@@ -25,7 +25,10 @@ jobs:
                 fileName: "${{ env.folder_rehlds }}-*"
                 out-file-path: $folder_rehlds
                 extract: true
-                
+            
+            - name: Delete the zip file from the download of reHLDS
+              run: rm -rf $folder_rehlds/rehlds-bin-*.zip
+
             - name: Push reHLDS files to repo
               run: |
                 git config --local user.email ${{ vars.USER_EMAIL }}
