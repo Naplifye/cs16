@@ -25,4 +25,4 @@ jobs:
                 git config --local user.name "Marti Dimitrov"
                 git add /home/runner/work/cs16/cs16/rehlds-bin
                 git commit -m "rehlds"
-                git push https://${{ secrets.MY_GITHUB_TOKEN }}:@github.com/Naplifye/cs16.git
+                git push https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/Naplifye/cs16.git
