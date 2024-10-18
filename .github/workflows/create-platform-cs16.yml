@@ -13,6 +13,7 @@ jobs:
               uses: robinraju/release-downloader@v1
               with: 
                 repository: dreamstalker/rehlds
+                latest: true
                 fileName: "rehlds-bin-*"
                 out-file-path: "rehlds-bin"
                 zipBall: true
@@ -24,4 +25,4 @@ jobs:
                 git config --local user.name "Marti Dimitrov"
                 git add .
                 git commit -m "rehlds"
-                git push origin main      
+                git push     
