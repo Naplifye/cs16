@@ -26,10 +26,10 @@ jobs:
                 out-file-path: ${{ env.folder_rehlds }}
                 extract: true
             
-            - name: Delete the zip file from the download of reHLDS
+            - name: Delete unneeded files (zip hlsdk)
               run: |
                 rm -rf ${{ env.folder_rehlds }}/rehlds-bin-*.zip
-                ls -la
+                rm -rf ${{ env.folder_rehlds }}/hlsdk
 
             - name: Push reHLDS files to repo
               run: |
