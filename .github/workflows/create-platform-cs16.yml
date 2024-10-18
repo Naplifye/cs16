@@ -21,8 +21,8 @@ jobs:
               with: 
                 repository: dreamstalker/rehlds
                 latest: true
-                fileName: "folder_rehlds-*"
-                out-file-path: "$folder_rehlds"
+                fileName: $folder_rehlds-*
+                out-file-path: $folder_rehlds
                 extract: true
                 
             - name: Push reHLDS files to repo
