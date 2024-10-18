@@ -18,13 +18,12 @@ jobs:
                 latest: true
                 fileName: "rehlds-bin-*"
                 out-file-path: "rehlds-bin"
-                zipBall: true
                 extract: true
                 
             - name: Push reHLDS files to repo
               run: |
-                git config --local user.email "marti.dimitrov1@icloud.com"
-                git config --local user.name "Marti Dimitrov"
+                git config --local user.email "marti.dimitrov@protonmail.com"
+                git config --local user.name "Naplifye"
                 git add /home/runner/work/cs16/cs16/rehlds-bin
                 git commit -m "rehlds"
                 git push https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/Naplifye/cs16.git
