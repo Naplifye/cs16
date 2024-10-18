@@ -31,8 +31,8 @@ jobs:
             
             - name: Delete unneeded files (zip hlsdk)
               run: |
-                rm -rf ${{ env.folder_rehlds }}/rehlds-bin-*.zip
-                rm -rf ${{ env.folder_rehlds }}/hlsdk
+                rm -f ${{ env.folder_rehlds }}/rehlds-bin-*.zip
+                rm -f ${{ env.folder_rehlds }}/hlsdk
 
             - name: Push reHLDS files to repo
               run: |
