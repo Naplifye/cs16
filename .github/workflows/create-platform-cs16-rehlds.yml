@@ -15,7 +15,7 @@ jobs:
               uses: actions/checkout@v4
              
             - name: Delete old reHLDS files
-              run: rm -rf "${{ env.folder_rehlds }}/bin"
+              run: rm -rf ${{ env.folder_rehlds }}/bin
             
             - name: Download reHLDS release files
               uses: robinraju/release-downloader@v1
