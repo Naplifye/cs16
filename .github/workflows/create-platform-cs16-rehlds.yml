@@ -17,9 +17,9 @@ jobs:
             - name: Delete old reHLDS files
               run: |
                 ls -la
-                rm -rf ${{ env.folder_rehlds }}
+                rm -rf $folder_rehlds
                 ls -la
-                
+
             - name: Download reHLDS release files
               uses: robinraju/release-downloader@v1
               with: 
