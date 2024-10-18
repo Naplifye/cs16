@@ -13,7 +13,7 @@ jobs:
               uses: robinraju/release-downloader@v1
               with: 
                 repository: dreamstalker/rehlds
-                tag: latest
+                latest: true
                 zipBall: true
                 extract: true
                 fileName: "rehlds-bin-*"
