@@ -79,7 +79,8 @@ jobs:
 
             - name: Extract the amxmodx_base tar.gz file
               run: |
-                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz
+                mkdir ${{ env.folder_amxmodx_base }}
+                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz -C ${{ env.folder_amxmodx_base }}
   
             - name: Delete unneeded files (zip, hlsdk, win32)
               run: |
