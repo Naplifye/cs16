@@ -10,12 +10,16 @@ env:
   repository_metamod_r: rehlds/metamod-r
   repository_reapi: rehlds/reapi
   repository_reunion: rehlds/reunion 
+  download_url_amxmodx_base: amxmodx-latest-base-linux.tar.gz
+  download_url_amxmodx_cstrike: amxmodx-latest-cstrike-linux.tar.gz  
 
   folder_rehlds: rehlds
   folder_regamedll: regamedll
   folder_metamod_r: metamod
   folder_reapi: reapi
   folder_reunion: reunion
+  folder_amxmodx_base: amxmodx_base
+  folder_amxmodx_cstrike: amxmodx_cstrike
 
 jobs:
     build-rehlds:
@@ -68,6 +72,14 @@ jobs:
                 fileName: "${{ env.folder_reunion}}-*"
                 out-file-path: ${{ env.folder_reunion}}
                 extract: true
+
+            - name: Download amxmodx_base
+              run: |
+                curl -L -o --retry 5 http://www.amxmodx.org/amxxdrop/1.10/amxmodx-latest-base-linux.tar.gz ${{ env.folder_amxmodx_base }}.tar.gz 
+
+            - name: Extract the amxmodx_base tar.gz file
+              run: |
+                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz ${{ env.folder_amxmodx_base }}
   
             - name: Delete unneeded files (zip, hlsdk, win32)
               run: |
@@ -104,6 +116,7 @@ jobs:
                 ./${{ env.folder_regamedll }} \
                 ./${{ env.folder_metamod_r }} \
                 ./${{ env.folder_reapi }} \
-                ./${{ env.folder_reunion }} 
+                ./${{ env.folder_reunion }} \
+                ./${{ env.folder_amxmodx_base }}
                 git commit -m "platform"
                 git push https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/${{ vars.USER_NAME }}/cs16.git
