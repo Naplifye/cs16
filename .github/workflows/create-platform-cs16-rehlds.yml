@@ -10,7 +10,7 @@ env:
   repository_metamod_r: rehlds/metamod-r
   repository_reapi: rehlds/reapi
 
-  folder_rehlds: rehlds
+  folder_rehlds: rehlds-bin
   folder_regamedll: regamedll
   folder_metamod_r: metamod
   folder_reapi: reapi
@@ -27,7 +27,7 @@ jobs:
               with: 
                 repository: ${{ env.repository_rehlds }}
                 latest: true
-                fileName: "${{ env.folder_rehlds }}-bin-*"
+                fileName: "${{ env.folder_rehlds }}-*"
                 out-file-path: ${{ env.folder_rehlds }}
                 extract: true
 
