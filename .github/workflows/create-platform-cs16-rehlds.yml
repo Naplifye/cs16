@@ -1,4 +1,4 @@
-name: create-platform-cs16
+name: download-platform-cs16
 
 on: push
 permissions:
@@ -33,7 +33,7 @@ jobs:
               with: 
                 repository: ${{ env.repository_rehlds }}
                 latest: true
-                fileName: "${{ env.folder_rehlds }}-*"
+                fileName: "${{ env.folder_rehlds }}-bin-*"
                 out-file-path: ${{ env.folder_rehlds }}
                 extract: true
 
