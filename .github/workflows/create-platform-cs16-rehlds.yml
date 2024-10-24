@@ -10,10 +10,10 @@ env:
   repository_metamod_r: rehlds/metamod-r
   repository_reapi: rehlds/reapi
 
-  folder_rehlds: rehlds-bin
+  folder_rehlds: rehlds
   folder_regamedll: regamedll
   folder_metamod_r: metamod
-  folder_reapi: reapi-bin
+  folder_reapi: reapi
 
 jobs:
     build-rehlds:
@@ -55,7 +55,7 @@ jobs:
                 repository: ${{ env.repository_reapi }}
                 latest: true
                 fileName: "${{ env.folder_reapi }}-*"
-                out-file-path: ${{ env.folder_reapis }}
+                out-file-path: ${{ env.folder_reapi }}
                 extract: true
   
             - name: Delete unneeded files (zip, hlsdk, win32)
