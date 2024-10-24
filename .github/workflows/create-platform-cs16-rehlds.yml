@@ -75,7 +75,7 @@ jobs:
 
             - name: Download amxmodx_base
               run: |
-                curl -L -o --retry 5 http://www.amxmodx.org/amxxdrop/1.10/amxmodx-latest-base-linux.tar.gz ${{ env.folder_amxmodx_base }}.tar.gz 
+                curl -L -o http://www.amxmodx.org/amxxdrop/1.10/amxmodx-latest-base-linux.tar.gz ${{ env.folder_amxmodx_base }}.tar.gz 
 
             - name: Extract the amxmodx_base tar.gz file
               run: |
