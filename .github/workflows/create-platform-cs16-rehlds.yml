@@ -10,8 +10,8 @@ env:
   repository_metamod_r: rehlds/metamod-r
   repository_reapi: rehlds/reapi
   repository_reunion: rehlds/reunion 
-  download_url_amxmodx_base: amxmodx-latest-base-linux.tar.gz
-  download_url_amxmodx_cstrike: amxmodx-latest-cstrike-linux.tar.gz  
+  download_url_amxmodx_base: https://www.amxmodx.org/amxxdrop/1.10/amxmodx-latest-base-linux.tar.gz
+  download_url_amxmodx_cstrike: http://www.amxmodx.org/amxxdrop/1.10/amxmodx-latest-cstrike-linux.tar.gz 
 
   folder_rehlds: rehlds
   folder_regamedll: regamedll
@@ -75,13 +75,22 @@ jobs:
 
             - name: Download amxmodx_base
               run: |
-                curl -L -o ${{ env.folder_amxmodx_base }}.tar.gz https://www.amxmodx.org/amxxdrop/1.10/amxmodx-latest-base-linux.tar.gz
+                curl -L -o ${{ env.folder_amxmodx_base }}.tar.gz ${{ env.download_url_amxmodx_base }}
 
             - name: Extract the amxmodx_base tar.gz file
               run: |
                 mkdir ${{ env.folder_amxmodx_base }}
                 tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz -C ${{ env.folder_amxmodx_base }}
+            
+            - name: Download amxmodx_cstrike
+              run: |
+                curl -L -o ${{ env.folder_amxmodx_cstrike }}.tar.gz ${{ env.download_url_amxmodx_cstrike }}
   
+            - name: Extract the amxmodx_base tar.gz file
+              run: |
+                mkdir ${{ env.folder_amxmodx_cstrike }}
+                tar -xzf ${{ env.folder_amxmodx_cstrike }}.tar.gz -C ${{ env.folder_amxmodx_cstrike }}
+
             - name: Delete unneeded files (zip, hlsdk, win32)
               run: |
                 rm -rf ${{ env.folder_rehlds }}/rehlds-bin-*.zip
@@ -108,9 +117,13 @@ jobs:
               run: |
                 rm -rf ${{ env.folder_reunion }}/reunion-*.zip
 
-            - name: Delete tar.gz
+            - name: Delete base tar.gz
               run: |
                 rm -rf ${{ env.folder_amxmodx_base }}.tar.gz
+
+            - name: Delete cstrike tar.gz
+              run: |
+                rm -rf ${{ env.folder_amxmodx_cstrike }}.tar.gz
 
             - name: Push new files to repo
               run: |
@@ -122,6 +135,7 @@ jobs:
                 ./${{ env.folder_metamod_r }} \
                 ./${{ env.folder_reapi }} \
                 ./${{ env.folder_reunion }} \
-                ./${{ env.folder_amxmodx_base }}
+                ./${{ env.folder_amxmodx_base }} \
+                ./${{ env.folder_amxmodx_cstrike }}
                 git commit -m "platform"
                 git push https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/${{ vars.USER_NAME }}/cs16.git
