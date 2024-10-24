@@ -79,17 +79,15 @@ jobs:
 
             - name: Extract the amxmodx_base tar.gz file
               run: |
-                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz
-                mv amxmodx-1.10.0-*-base-linux ${{ env.folder_amxmodx_base }} 
+                mkdir ${{ env.folder_amxmodx_base }} ; tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz -C ${{ env.folder_amxmodx_base }} 
             
             - name: Download amxmodx_cstrike
               run: |
                 curl -L -o ${{ env.folder_amxmodx_cstrike }}.tar.gz ${{ env.download_url_amxmodx_cstrike }}
   
-            - name: Extract the amxmodx_base tar.gz file
+            - name: Extract the amxmodx_cstrike tar.gz file
               run: |
-                tar -xzf ${{ env.folder_amxmodx_cstrike }}.tar.gz
-                mv amxmodx-1.10.0-*-cstrike-linux ${{ env.folder_amxmodx_cstrike }} 
+                mkdir ${{ env.folder_amxmodx_cstrike }} ; tar -xzf ${{ env.folder_amxmodx_cstrike }}.tar.gz -C ${{ env.folder_amxmodx_cstrike }} 
 
             - name: Delete unneeded files (zip, hlsdk, win32)
               run: |
