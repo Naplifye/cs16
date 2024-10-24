@@ -79,7 +79,7 @@ jobs:
 
             - name: Extract the amxmodx_base tar.gz file
               run: |
-                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz -C ./${{ env.folder_amxmodx_base }}
+                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz
   
             - name: Delete unneeded files (zip, hlsdk, win32)
               run: |
@@ -106,6 +106,10 @@ jobs:
             - name: Delete unneeded files (zip)
               run: |
                 rm -rf ${{ env.folder_reunion }}/reunion-*.zip
+
+            - name: Delete tar.gz
+              run: |
+                rm -rf ${{ env.folder_amxmodx_base }}.tar.gz
 
             - name: Push new files to repo
               run: |
