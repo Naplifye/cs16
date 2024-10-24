@@ -79,7 +79,7 @@ jobs:
 
             - name: Extract the amxmodx_base tar.gz file
               run: |
-                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz -C
+                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz
                 mv amxmodx-1.10.0-*-base-linux ${{ env.folder_amxmodx_base }} 
             
             - name: Download amxmodx_cstrike
