@@ -13,7 +13,7 @@ env:
   folder_rehlds: rehlds-bin
   folder_regamedll: regamedll
   folder_metamod_r: metamod
-  folder_reapi: reapi
+  folder_reapi: reapi-bin
 
 jobs:
     build-rehlds:
@@ -76,7 +76,7 @@ jobs:
                 rm -rf ${{ env.folder_metamod_r }}/sdk
                 rm -rf ${{ env.folder_metamod_r }}/example_plugin
 
-            - name: Delete unneeded files (zip, sdk, example_plugin)
+            - name: Delete unneeded files (zip)
               run: |
                 rm -rf ${{ env.folder_reapi }}/reapi-bin-*.zip
 
