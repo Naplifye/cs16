@@ -7,7 +7,7 @@ permissions:
 env: 
   folder_rehlds: rehlds-bin
   repository_rehlds: dreamstalker/rehlds
-  folder_regamedll: regamedll_cs
+  folder_regamedll: regamedll
   repository_regamedll: s1lentq/ReGameDLL_CS
 
 
