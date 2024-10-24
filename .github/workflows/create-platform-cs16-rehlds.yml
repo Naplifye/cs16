@@ -14,9 +14,6 @@ jobs:
         steps:
             - name: Checkout repo
               uses: actions/checkout@v4
-             
-            - name: Delete old reHLDS files
-              run:  rm -rf ${{ env.folder_rehlds }}
 
             - name: Download reHLDS release files
               uses: robinraju/release-downloader@v1
@@ -27,7 +24,7 @@ jobs:
                 out-file-path: ${{ env.folder_rehlds }}
                 extract: true
             
-            - name: Delete unneeded files (zip hlsdk)
+            - name: Delete unneeded files (zip, hlsdk)
               run: |
                 rm -rf ${{ env.folder_rehlds }}/rehlds-bin-*.zip
                 rm -rf ${{ env.folder_rehlds }}/hlsdk
