@@ -9,11 +9,13 @@ env:
   repository_regamedll: s1lentq/ReGameDLL_CS
   repository_metamod_r: rehlds/metamod-r
   repository_reapi: rehlds/reapi
+  repository_reunion: rehlds/reunion 
 
-  folder_rehlds: rehlds-bin
+  folder_rehlds: rehlds
   folder_regamedll: regamedll
   folder_metamod_r: metamod
   folder_reapi: reapi
+  folder_reunion: reunion
 
 jobs:
     build-rehlds:
@@ -27,7 +29,7 @@ jobs:
               with: 
                 repository: ${{ env.repository_rehlds }}
                 latest: true
-                fileName: "${{ env.folder_rehlds }}-*"
+                fileName: "${{ env.folder_rehlds }}-bin-*"
                 out-file-path: ${{ env.folder_rehlds }}
                 extract: true
 
@@ -57,6 +59,15 @@ jobs:
                 fileName: "${{ env.folder_reapi }}-*"
                 out-file-path: ${{ env.folder_reapi }}
                 extract: true
+
+            - name: Download reunion
+              uses: robinraju/release-downloader@v1
+              with: 
+                repository: ${{ env.repository_reunion }}
+                latest: true
+                fileName: "${{ env.folder_reunion}}-*"
+                out-file-path: ${{ env.folder_reunion}}
+                extract: true
   
             - name: Delete unneeded files (zip, hlsdk, win32)
               run: |
@@ -80,6 +91,10 @@ jobs:
               run: |
                 rm -rf ${{ env.folder_reapi }}/reapi-bin-*.zip
 
+            - name: Delete unneeded files (zip)
+              run: |
+                rm -rf ${{ env.folder_reunion }}/reunion-*.zip
+
             - name: Push new files to repo
               run: |
                 git config --local user.email ${{ vars.USER_EMAIL }}
@@ -88,6 +103,7 @@ jobs:
                 ./${{ env.folder_rehlds }} \
                 ./${{ env.folder_regamedll }} \
                 ./${{ env.folder_metamod_r }} \
-                ./${{ env.folder_reapi }}
+                ./${{ env.folder_reapi }} \
+                ./${{ env.folder_reunion }} 
                 git commit -m "platform"
                 git push https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/${{ vars.USER_NAME }}/cs16.git
