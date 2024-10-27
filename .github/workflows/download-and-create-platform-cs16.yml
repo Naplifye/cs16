@@ -96,7 +96,7 @@ jobs:
                 rm -rf ${{ env.folder_amxmodx_cstrike }}.tar.gz
                 
             # Create platform
-            - name: Create platform 
+            - name: Create platform
               run: |
                 # Create cstrike directory in $foder_cstrike
                 mkdir -p ${{ env.folder_cs16 }}/cstrike/dlls
