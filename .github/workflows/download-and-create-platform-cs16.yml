@@ -15,7 +15,7 @@ env:
 
   folder_rehlds: rehlds
   folder_regamedll: regamedll
-  folder_metamod_r: metamod
+  folder_metamod_r: metamod-r
   folder_reapi: reapi
   folder_reunion: reunion
   folder_amxmodx_base: amxmodx_base
@@ -103,13 +103,13 @@ jobs:
                 # Merge amxmodx with build
                 cp -rp ${{ env.folder_amxmodx }}/addons ${{ env.folder_cs16 }}/cstrike/
                 # Merge rehlds with build
-                cp -rp ${{ env.folder_rehlds }} ${{ env.folder_cs16 }}/
+                cp -rp ${{ env.folder_rehlds }}/bin/linux32/ ${{ env.folder_cs16 }}/
                 # Merge regamedll with build
                 cp -rp ${{ env.folder_regamedll }}/bin/linux32/cstrike/dlls/cs.so ${{ env.folder_cs16 }}/cstrike/dlls/
                 cp -rp ${{ env.folder_regamedll }}/bin/linux32/cstrike/game.cfg ${{ env.folder_cs16 }}/cstrike/
                 # Merge metamod-r with build
                 cp -rp ${{ env.folder_metamod_r }}/addons/metamod ${{ env.folder_cs16 }}/cstrike/addons/metamod/
-
+                sed -i 's|gamedll_linux "dlls/cs_i386.so"|gamedll_linux "addons/metamod/dlls/metamod_i386.so"|' ${{ env.folder_cs16 }}/cstrike/liblist.gam
 
             - name: Push new files to repo
               run: |
