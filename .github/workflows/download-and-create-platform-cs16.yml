@@ -98,6 +98,8 @@ jobs:
             # Create platform
             - name: Create platform 
               run: |
+                # Create some directories 
+                mkdir -p ${{ env.folder_cs16 }}/cstrike/
                 # Merge amxmodx with build
                 cp -r ${{ env.folder_amxmodx }} ${{ env.folder_cs16 }}/cstrike
                 # Merge rehlds with build
