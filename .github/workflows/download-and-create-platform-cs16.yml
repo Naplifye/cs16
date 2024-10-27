@@ -21,10 +21,10 @@ env:
   folder_amxmodx_base: amxmodx_base
   folder_amxmodx_cstrike: amxmodx_cstrike
   folder_amxmodx: amxmodx
-  folder_cs16: /home/steam/cs16
+  folder_cs16: cs16
 
 jobs:
-    build-rehlds:
+    build-cs16:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repo
