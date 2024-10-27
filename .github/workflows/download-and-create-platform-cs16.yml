@@ -107,6 +107,7 @@ jobs:
                 # Merge regamedll with build
                 cp -rp ${{ env.folder_regamedll }}/bin/linux32/cstrike/dlls/cs.so ${{ env.folder_cs16 }}/cstrike/dlls/
                 cp -rp ${{ env.folder_regamedll }}/bin/linux32/cstrike/game.cfg ${{ env.folder_cs16 }}/cstrike/
+                cp -rp ${{ env.folder_regamedll }}/bin/linux32/cstrike/game_init.cfg ${{ env.folder_cs16 }}/cstrike/
                 # Merge metamod-r with build
                 cp -rp ${{ env.folder_metamod_r }}/addons/metamod ${{ env.folder_cs16 }}/cstrike/addons/metamod/
                 # Merge reapi with build

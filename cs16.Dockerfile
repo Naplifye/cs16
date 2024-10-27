@@ -18,8 +18,12 @@ RUN until /home/steam/steamcmd/steamcmd.sh \
 sleep 5; \
 done 
 
-# Fix files for metamod
-RUN sed -i 's|gamedll_linux "dlls/cs_i386.so"|gamedll_linux "addons/metamod/dlls/metamod_i386.so"|' ${steamappdir}/cstrike/liblist.gam
+# Activate metamod-r 
+RUN sed -i 's|gamedll_linux "dlls/cs.so"|gamedll_linux "addons/metamod/metamod_i386.so"|' ${steamappdir}/cstrike/liblist.gam
+
+# Copy build from folder
+COPY --chown=steam:steam ./cs16 ${steamappdir}
+RUN chmod +x /home/steam/cs16/hlds_linux
 
 # Expose ports for server connection (default ports)
 EXPOSE 27015/udp 27015/tcp
