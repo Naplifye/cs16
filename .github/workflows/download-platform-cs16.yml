@@ -129,7 +129,6 @@ jobs:
                 ./${{ env.folder_metamod_r }} \
                 ./${{ env.folder_reapi }} \
                 ./${{ env.folder_reunion }} \
-                ./${{ env.folder_amxmodx_base }} \
-                ./${{ env.folder_amxmodx_cstrike }}
+                ./${{ env.folder_amxmodx }}
                 git commit -m "platform"
                 git push https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/${{ vars.USER_NAME }}/cs16.git
