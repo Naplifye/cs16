@@ -103,7 +103,7 @@ jobs:
                 # Merge amxmodx with build
                 cp -rp ${{ env.folder_amxmodx }}/addons ${{ env.folder_cs16 }}/cstrike/
                 # Merge rehlds with build
-                cp -rp ${{ env.folder_rehlds }}/bin/linux32/ ${{ env.folder_cs16 }}/
+                cp -rp ${{ env.folder_rehlds }}/bin/linux32/* ${{ env.folder_cs16 }}/
                 # Merge regamedll with build
                 cp -rp ${{ env.folder_regamedll }}/bin/linux32/cstrike/dlls/cs.so ${{ env.folder_cs16 }}/cstrike/dlls/
                 cp -rp ${{ env.folder_regamedll }}/bin/linux32/cstrike/game.cfg ${{ env.folder_cs16 }}/cstrike/
