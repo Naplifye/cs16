@@ -54,7 +54,7 @@ jobs:
               with: 
                 repository: ${{ env.repository_metamod_r }}
                 latest: true
-                fileName: "${{ env.folder_metamod_r }}-*"
+                fileName: "metamod-*"
                 out-file-path: ${{ env.folder_metamod_r }}
                 extract: true
   
