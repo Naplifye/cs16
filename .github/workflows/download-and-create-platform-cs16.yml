@@ -99,7 +99,7 @@ jobs:
             - name: Create platform 
               run: |
                 # Create cstrike directory in $foder_cstrike
-                mkdir -p ${{ env.folder_cs16 }}/cstrike
+                mkdir -p ${{ env.folder_cs16 }}/cstrike/dlls
                 # Merge amxmodx with build
                 cp -rp ${{ env.folder_amxmodx }}/addons ${{ env.folder_cs16 }}/cstrike/
                 # Merge rehlds with build
