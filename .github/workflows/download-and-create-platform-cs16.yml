@@ -126,8 +126,6 @@ jobs:
                 ./${{ env.folder_metamod_r }} \
                 ./${{ env.folder_reapi }} \
                 ./${{ env.folder_reunion }} \
-                ./${{ env.folder_amxmodx_base }} \
-                ./${{ env.folder_amxmodx_cstrike }} \
                 ./${{ env.folder_amxmodx }} \
                 ./${{ env.folder_cs16 }}
                 git commit -m "platform"
