@@ -113,8 +113,8 @@ jobs:
                 cp -rp ${{ env.folder_reapi }}/addons/amxmodx/modules/reapi_amxx_i386.so ${{ env.folder_cs16 }}/cstrike/addons/amxmodx/modules/
                 # Merge reunion with build
                 mkdir -p ${{ env.folder_cs16 }}/cstrike/reunion
-                cp -rp ${{ env.folder_reunion }}/reunion/bin/Linux/reunion_mm_i386.so ${{ env.folder_cs16 }}/cstrike/reunion
-                cp -rp ${{ env.folder_reunion }}/reunion/reunion.cfg ${{ env.folder_cs16 }}/cstrike/reunion.cfg
+                cp -rp ${{ env.folder_reunion }}/bin/Linux/reunion_mm_i386.so ${{ env.folder_cs16 }}/cstrike/reunion
+                cp -rp ${{ env.folder_reunion }}/reunion.cfg ${{ env.folder_cs16 }}/cstrike/reunion.cfg
 
             - name: Push new files to repo
               run: |
