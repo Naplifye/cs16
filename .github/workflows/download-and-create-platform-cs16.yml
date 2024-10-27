@@ -1,4 +1,4 @@
-name: download-platform-cs16
+name: download-and-create-platform-cs16
 
 on: push
 permissions:
@@ -21,6 +21,7 @@ env:
   folder_amxmodx_base: amxmodx_base
   folder_amxmodx_cstrike: amxmodx_cstrike
   folder_amxmodx: amxmodx
+  folder_cs16: /home/steam/cs16
 
 jobs:
     build-rehlds:
@@ -29,6 +30,7 @@ jobs:
             - name: Checkout repo
               uses: actions/checkout@v4
 
+            # Download files for platform
             - name: Download reHLDS
               uses: robinraju/release-downloader@v1
               with: 
@@ -74,50 +76,38 @@ jobs:
                 out-file-path: ${{ env.folder_reunion}}
                 extract: true
 
-            - name: Download amxmodx_base && amxmodx_cstrike
+            - name: Download amxmodx_base && amxmodx_cstrike and extract tar.gz file
               run: |
-                curl -L -o ${{ env.folder_amxmodx_base }}.tar.gz ${{ env.download_url_amxmodx_base }} &&
+                curl -L -o ${{ env.folder_amxmodx_base }}.tar.gz ${{ env.download_url_amxmodx_base }} 
                 curl -L -o ${{ env.folder_amxmodx_cstrike }}.tar.gz ${{ env.download_url_amxmodx_cstrike }}
-
-            - name: Extract the amxmodx_base tar.gz file
-              run: |
-                mkdir -p ${{ env.folder_amxmodx }} &&
-                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz -C ${{ env.folder_amxmodx }} &&
+                mkdir -p ${{ env.folder_amxmodx }} 
+                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz -C ${{ env.folder_amxmodx }} 
                 tar -xzf ${{ env.folder_amxmodx_cstrike }}.tar.gz -C ${{ env.folder_amxmodx }} 
-
-            - name: Delete unneeded files (zip, hlsdk, win32, )
+            
+            # Delete zip files
+            - name: Delete zip and tar.gz files
               run: |
                 rm -rf ${{ env.folder_rehlds }}/rehlds-bin-*.zip
-                rm -rf ${{ env.folder_rehlds }}/hlsdk
-                rm -rf ${{ env.folder_rehlds }}/bin/win32
-            
-            - name: Delete unneeded files (zip, cssdk, win32)
-              run: |
                 rm -rf ${{ env.folder_regamedll }}/regamedll-bin-*.zip
-                rm -rf ${{ env.folder_regamedll }}/cssdk
-                rm -rf ${{ env.folder_regamedll }}/bin/win32
-
-            - name: Delete unneeded files (zip, sdk, example_plugin)
-              run: |
                 rm -rf ${{ env.folder_metamod_r }}/metamod-bin-*.zip
-                rm -rf ${{ env.folder_metamod_r }}/sdk
-                rm -rf ${{ env.folder_metamod_r }}/example_plugin
-
-            - name: Delete unneeded files (zip)
-              run: |
                 rm -rf ${{ env.folder_reapi }}/reapi-bin-*.zip
-
-            - name: Delete unneeded files (zip)
-              run: |
                 rm -rf ${{ env.folder_reunion }}/reunion-*.zip
-
-            - name: Delete base tar.gz
-              run: |
                 rm -rf ${{ env.folder_amxmodx_base }}.tar.gz
-
-            - name: Delete cstrike tar.gz
-              run: |
                 rm -rf ${{ env.folder_amxmodx_cstrike }}.tar.gz
+                
+            # Create platform
+            - name: Create platform 
+              run: |
+                # Merge rehlds with steamcmd build
+                mkdir -p ${{ env.folder_cs16 }}
+                mv ${{ env.folder_rehlds }} ${{ env.folder_cs16 }}/
+                # Merge regamedll with steamcmd build
+                mv ${{ env.folder_regamedll }}/bin/linux32/cstrike/dlls/cs.so ${{ env.folder_cs16 }}/cstrike/dlls/
+                mv ${{ env.folder_regamedll }}/bin/linux32/cstrike/game.cfg ${{ env.folder_cs16 }}/cstrike/
+                # Merge metamod-r with steamcmd build
+                mv ${{ env.folder_metamod_r }}/addons/metamod ${{ env.folder_cs16 }}/cstrike/addons/metamod/
+
+
 
             - name: Push new files to repo
               run: |
@@ -129,6 +119,9 @@ jobs:
                 ./${{ env.folder_metamod_r }} \
                 ./${{ env.folder_reapi }} \
                 ./${{ env.folder_reunion }} \
-                ./${{ env.folder_amxmodx }}
+                ./${{ env.folder_amxmodx_base }} \
+                ./${{ env.folder_amxmodx_cstrike }} \
+                ./${{ env.folder_amxmodx }} \
+                ./${{ env.folder_cs16 }}
                 git commit -m "platform"
                 git push https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/${{ vars.USER_NAME }}/cs16.git
