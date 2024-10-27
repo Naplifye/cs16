@@ -98,18 +98,16 @@ jobs:
             # Create platform
             - name: Create platform 
               run: |
-                # Create some directories 
-                mkdir -p ${{ env.folder_cs16 }}/cstrike/dlls
                 # Merge amxmodx with build
-                cp -r ${{ env.folder_amxmodx }} ${{ env.folder_cs16 }}/cstrike
+                cp -rp ${{ env.folder_amxmodx }} ${{ env.folder_cs16 }}/cstrike
                 # Merge rehlds with build
                 mkdir -p ${{ env.folder_cs16 }}
-                cp -r ${{ env.folder_rehlds }} ${{ env.folder_cs16 }}/
+                cp -rp ${{ env.folder_rehlds }} ${{ env.folder_cs16 }}/
                 # Merge regamedll with build
-                cp -r ${{ env.folder_regamedll }}/bin/linux32/cstrike/dlls/cs.so ${{ env.folder_cs16 }}/cstrike/dlls/
-                cp -r ${{ env.folder_regamedll }}/bin/linux32/cstrike/game.cfg ${{ env.folder_cs16 }}/cstrike/
+                cp -rp ${{ env.folder_regamedll }}/bin/linux32/cstrike/dlls/cs.so ${{ env.folder_cs16 }}/cstrike/dlls/
+                cp -rp ${{ env.folder_regamedll }}/bin/linux32/cstrike/game.cfg ${{ env.folder_cs16 }}/cstrike/
                 # Merge metamod-r with build
-                cp -r ${{ env.folder_metamod_r }}/addons/metamod ${{ env.folder_cs16 }}/cstrike/addons/metamod/
+                cp -rp ${{ env.folder_metamod_r }}/addons/metamod ${{ env.folder_cs16 }}/cstrike/addons/metamod/
 
 
             - name: Push new files to repo
