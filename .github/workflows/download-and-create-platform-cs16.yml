@@ -109,7 +109,12 @@ jobs:
                 cp -rp ${{ env.folder_regamedll }}/bin/linux32/cstrike/game.cfg ${{ env.folder_cs16 }}/cstrike/
                 # Merge metamod-r with build
                 cp -rp ${{ env.folder_metamod_r }}/addons/metamod ${{ env.folder_cs16 }}/cstrike/addons/metamod/
-                sed -i 's|gamedll_linux "dlls/cs_i386.so"|gamedll_linux "addons/metamod/dlls/metamod_i386.so"|' ${{ env.folder_cs16 }}/cstrike/liblist.gam
+                # Merge reapi with build
+                cp -rp ${{ env.folder_reapi }}/addons/amxmodx/modules/reapi_amxx_i386.so ${{ env.folder_cs16 }}/cstrike/addons/amxmodx/modules/
+                # Merge reunion with build
+                mkdir -p ${{ env.folder_cs16 }}/cstrike/reunion
+                cp -rp ${{ env.folder_reunion }}/reunion/bin/Linux/reunion_mm_i386.so ${{ env.folder_cs16 }}/cstrike/reunion
+                cp -rp ${{ env.folder_reunion }}/reunion/reunion.cfg ${{ env.folder_cs16 }}/cstrike/reunion.cfg
 
             - name: Push new files to repo
               run: |
