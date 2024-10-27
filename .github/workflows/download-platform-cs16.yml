@@ -9,9 +9,9 @@ env:
   repository_regamedll: s1lentq/ReGameDLL_CS
   repository_metamod_r: rehlds/metamod-r
   repository_reapi: rehlds/reapi
-  repository_reunion: rehlds/reunion 
+  repository_reunion: rehlds/reunion
   download_url_amxmodx_base: https://www.amxmodx.org/amxxdrop/1.10/amxmodx-latest-base-linux.tar.gz
-  download_url_amxmodx_cstrike: http://www.amxmodx.org/amxxdrop/1.10/amxmodx-latest-cstrike-linux.tar.gz 
+  download_url_amxmodx_cstrike: http://www.amxmodx.org/amxxdrop/1.10/amxmodx-latest-cstrike-linux.tar.gz
 
   folder_rehlds: rehlds
   folder_regamedll: regamedll
@@ -20,6 +20,7 @@ env:
   folder_reunion: reunion
   folder_amxmodx_base: amxmodx_base
   folder_amxmodx_cstrike: amxmodx_cstrike
+  folder_amxmodx: amxmodx
 
 jobs:
     build-rehlds:
@@ -73,25 +74,18 @@ jobs:
                 out-file-path: ${{ env.folder_reunion}}
                 extract: true
 
-            - name: Download amxmodx_base
+            - name: Download amxmodx_base && amxmodx_cstrike
               run: |
                 curl -L -o ${{ env.folder_amxmodx_base }}.tar.gz ${{ env.download_url_amxmodx_base }}
+                curl -L -o ${{ env.folder_amxmodx_cstrike }}.tar.gz ${{ env.download_url_amxmodx_cstrike }}
 
             - name: Extract the amxmodx_base tar.gz file
               run: |
-                mkdir -p ${{ env.folder_amxmodx_base }}
-                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz -C ${{ env.folder_amxmodx_base }} 
-            
-            - name: Download amxmodx_cstrike
-              run: |
-                curl -L -o ${{ env.folder_amxmodx_cstrike }}.tar.gz ${{ env.download_url_amxmodx_cstrike }}
-  
-            - name: Extract the amxmodx_cstrike tar.gz file
-              run: |
-                mkdir -p ${{ env.folder_amxmodx_cstrike }} 
-                tar -xzf ${{ env.folder_amxmodx_cstrike }}.tar.gz -C ${{ env.folder_amxmodx_cstrike }} 
+                mkdir -p ${{ env.folder_amxmodx }}
+                tar -xzf ${{ env.folder_amxmodx_base }}.tar.gz -C ${{ env.folder_amxmodx }}
+                tar -xzf ${{ env.folder_amxmodx_cstrike }}.tar.gz -C ${{ env.folder_amxmodx }} 
 
-            - name: Delete unneeded files (zip, hlsdk, win32)
+            - name: Delete unneeded files (zip, hlsdk, win32, )
               run: |
                 rm -rf ${{ env.folder_rehlds }}/rehlds-bin-*.zip
                 rm -rf ${{ env.folder_rehlds }}/hlsdk
