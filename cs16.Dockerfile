@@ -23,6 +23,8 @@ RUN sed -i 's|gamedll_linux "dlls/cs.so"|gamedll_linux "addons/metamod/metamod_i
 
 # Copy build from folder
 COPY --chown=steam:steam ./cs16 ${steamappdir}
+
+# Make hlds_linux executable
 RUN chmod +x /home/steam/cs16/hlds_linux
 
 # Expose ports for server connection (default ports)
